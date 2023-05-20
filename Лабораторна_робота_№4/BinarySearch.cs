@@ -8,23 +8,23 @@ namespace Лабораторна_робота__4
 {
     public class BinarySearch
     {
-        public static List<int> Search(int[]arr,int number)
+        public static int Search(int[]arr,int number)
         {
             int middle = arr.Length / 2;
             int start = 0;
             int end =arr.Length-1;
-            List<int> list = new List<int>();
+            int index = 0;
             while(true)
             {
                 if (arr[middle] == number)
                 {
-                    list.Add(middle);
+                    index++;
                     if (arr[middle + 1] == number)
                     {
                         for (int i = middle+1; i < end; i++)
                         {
                             if (arr[i] == number)
-                                list.Add(arr[i]);
+                                index++;
                             else
                                 break;
                         }
@@ -34,7 +34,7 @@ namespace Лабораторна_робота__4
                         for (int i = middle-1; i >= start; i--)
                         {
                             if (arr[i] == number)
-                                list.Add(arr[i]);
+                                index++;
                             else
                                 break;
                         }
@@ -43,11 +43,23 @@ namespace Лабораторна_робота__4
                 }
                 if (arr[end] == number) 
                 {
-                    list.Add(end);
+                    index++;
                     for (int i = end-1; i >= start; i--)
                     {
                         if (arr[i] == number)
-                            list.Add(arr[i]);
+                            index++;
+                        else
+                            break;
+                    }
+                    break;
+                }
+                if (arr[start] == number)
+                {
+                    index++;
+                    for (int i = start + 1; i < end; i++)
+                    {
+                        if (arr[i] == number)
+                            index++;
                         else
                             break;
                     }
@@ -68,7 +80,7 @@ namespace Лабораторна_робота__4
                     middle =(middle + start)/2;
                 }
             }
-            return list;
+            return index;
         }
     }
 }

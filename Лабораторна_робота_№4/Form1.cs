@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
+using System.Diagnostics;
 
 namespace Лабораторна_робота__4
 {
@@ -34,9 +35,18 @@ namespace Лабораторна_робота__4
         private void button1_Click(object sender, EventArgs e)
         {
             int number=(int)numericUpDown1.Value;
-            List<int> list;
-            list=BinarySearch.Search(arr, number);
-            label3.Text=number+" "+list.Count;
+            var swFirst = new Stopwatch();
+            var swSecond= new Stopwatch();
+            swFirst.Start();
+            int indexFirst= BinarySearch.Search(arr, number);
+            swFirst.Stop();
+            swSecond.Start();
+            int indexSecond=SequentialІSearch.Search(arr, number);
+            swSecond.Stop();
+            label5.Text="Кількість (за бінарного пошуку): "+ indexFirst;
+            label3.Text = "Кількість (за послідовного пошуку): " + indexSecond;
+            label4.Text = "Витрачено часу для бінарного пошуку: " + swFirst.Elapsed;
+            label6.Text = "Витрачено часу для послідовного пошуку: " + swSecond.Elapsed;
         }
     }
 }
