@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Windows.Forms;
 
 namespace Лабораторна_робота__4
@@ -33,7 +34,9 @@ namespace Лабораторна_робота__4
         private void button1_Click(object sender, EventArgs e)
         {
             int number=(int)numericUpDown1.Value;
-            BinarySearch.Search(arr, number);
+            List<int> list;
+            list=BinarySearch.Search(arr, number);
+            label3.Text=number+" "+list.Count;
         }
     }
 }
