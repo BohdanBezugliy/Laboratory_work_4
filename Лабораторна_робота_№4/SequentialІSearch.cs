@@ -8,7 +8,7 @@ namespace Лабораторна_робота__4
 {
     public class SequentialІSearch
     {
-        public static int Search(int[] arr, int number)
+        public static int Search(int[] arr, int number,List<int>indexes)
         {
             int index = 0;
             foreach(int item in arr) 

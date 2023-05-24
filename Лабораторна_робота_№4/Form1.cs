@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Windows.Forms;
-using System.Diagnostics;
 
 namespace Лабораторна_робота__4
 {
@@ -34,9 +34,22 @@ namespace Лабораторна_робота__4
         }
         private void button1_Click(object sender, EventArgs e)
         {
+            List<int> indexes=new List<int>();
             int number=(int)numericUpDown1.Value;
-            label5.Text="Кількість (за бінарного пошуку): " + BinarySearch.Search(arr, number);
-            label3.Text = "Кількість (за послідовного пошуку): " + SequentialІSearch.Search(arr, number);
+            label5.Text="Кількість (за бінарного пошуку): " + BinarySearch.Search(arr, number, indexes);
+            label3.Text = "Кількість (за послідовного пошуку): " + SequentialІSearch.Search(arr, number, indexes);
+            for (int i = 0; i < arr.Length; i++)
+            {
+                dataGridView1.Rows[0].Cells[i].Selected = false;
+                dataGridView2.Rows[0].Cells[i].Selected=false;
+                for (int j = 0; j < indexes.Count; j++)
+                {
+                    if (i == indexes[j])
+                    {
+                        dataGridView2.Rows[0].Cells[i].Selected=true;
+                    }
+                }
+            }
         }
     }
 }
