@@ -8,79 +8,59 @@ namespace Лабораторна_робота__4
 {
     public class BinarySearch
     {
+        private static int CountNumbInArr(int[] arr, int position,int number)
+        {
+            int index = 1;
+            if(position == 0)
+            {
+                while (arr[++ position] == number)
+                    index++;
+            }
+            else if (arr[position + 1] == number)
+            {
+                while (arr[++position]==number)
+                    index++;
+            }
+            else if(position==arr.Length-1 || arr[position - 1] == number)
+            {
+                while (arr[--position] == number)
+                    index++;
+            }
+            return index;
+        }
         public static int Search(int[]arr,int number)
         {
             int middle = arr.Length / 2;
             int start = 0;
             int end =arr.Length-1;
-            int index = 0;
-            while(true)
+            int position = 0;
+            if (arr[start] == number)
             {
-                if (arr[middle] == number)
-                {
-                    index++;
-                    if (arr[middle + 1] == number)
-                    {
-                        for (int i = middle+1; i < end; i++)
-                        {
-                            if (arr[i] == number)
-                                index++;
-                            else
-                                break;
-                        }
-                    }
-                    if (arr[middle - 1] == number)
-                    {
-                        for (int i = middle-1; i >= start; i--)
-                        {
-                            if (arr[i] == number)
-                                index++;
-                            else
-                                break;
-                        }
-                    }
-                    break;
-                }
-                if (arr[end] == number) 
-                {
-                    index++;
-                    for (int i = end-1; i >= start; i--)
-                    {
-                        if (arr[i] == number)
-                            index++;
-                        else
-                            break;
-                    }
-                    break;
-                }
-                if (arr[start] == number)
-                {
-                    index++;
-                    for (int i = start + 1; i < end; i++)
-                    {
-                        if (arr[i] == number)
-                            index++;
-                        else
-                            break;
-                    }
-                    break;
-                }
-                if (middle==0||middle==start)
-                {
-                    break;
-                }
-                if (arr[middle]<number) 
+                return CountNumbInArr(arr, start,number);
+            }
+            else if (arr[end] == number) 
+            {
+                return CountNumbInArr(arr, end, number);
+            }
+            while(start!=middle)
+            {
+                if (number > arr[middle])
                 {
                     start = middle;
-                    middle = (middle + end)/2;
+                    middle = (start + end) / 2;
                 }
-                else 
+                else if(number < arr[middle])
                 {
                     end = middle;
-                    middle =(middle + start)/2;
+                    middle = (start + end) / 2;
+                }
+                if (number == arr[middle])
+                {
+                    position = middle;
+                    return CountNumbInArr(arr, position, number);
                 }
             }
-            return index;
+            return position;
         }
     }
 }
